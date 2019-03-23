@@ -1,4 +1,5 @@
 <?php
+// 创建一个TCP的同步客户端
 $client = new swoole_client(SWOOLE_SOCK_TCP);
 
 //连接到服务器
