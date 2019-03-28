@@ -22,5 +22,5 @@ function maoPao($arr)
     return $arr;
 }
 
-$arr = [5,2,4,6,1,3];
+$arr = [4, 3, 2, 1];
 var_dump(maoPao($arr));

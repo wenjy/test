@@ -8,7 +8,7 @@
  * @date: 下午9:55 2018/11/23
  */
 
-$arr = [5, 2, 4, 7, 1, 3, 8, 6, 10, 9, 2];
+$arr = [4, 3, 2, 1];
 function merge(&$arr, $p, $q, $r)
 {
     // 两个起始点位置
@@ -46,6 +46,7 @@ function mergeSort(&$arr, $p, $r)
         $q = floor(($p + $r) / 2); // $arr $arr[$p - $q] $arr[$q+1 - $r]
         mergeSort($arr, $p, $q); // $arr[$p - $q]
         mergeSort($arr, $q + 1, $r); // $arr[$q+1 - $r]
+        echo 'p->'.$p.' q->'.$q.' r->'.$r.PHP_EOL;
         merge($arr, $p, $q, $r);
     }
 }
