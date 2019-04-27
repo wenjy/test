@@ -1,0 +1,18 @@
+<?php
+/**
+array compact ( mixed varname [, mixed ...] )
+compact() 接受可变的参数数目。每个参数可以是一个包括变量名的字符串或者是一个包含变量名的数组，
+该数组中还可以包含其它单元内容为变量名的数组， compact() 可以递归处理。 
+对每个参数，compact() 在当前的符号表中查找该变量名并将它添加到输出的数组中，变量名成为键名而变量的内容成为该键的值。
+简单说，它做的事和 extract() 正好相反。返回将所有变量添加进去后的数组。 
+任何没有变量名与之对应的字符串都被略过。 
+Gotcha: 因为可变变量也许不能在函数内部用于 PHP 的超全局数组，此时不能将超全局数组传递入 compact() 中。 
+*/
+$city  = "San Francisco";
+$state = "CA";
+$event = "SIGGRAPH";
+
+$location_vars = array("city", "state");
+
+$result = compact("event", "nothing_here", $location_vars);
+var_dump($result);
