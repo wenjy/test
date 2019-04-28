@@ -6,38 +6,31 @@
 
 class Ping
 {
-    /**
-     * @var resource
-     */
-    protected $socket;
-
-    public function __construct($timeout = 1)
+    public function run($ip, $timeout = 1)
     {
         /* create the socket, the last '1' denotes ICMP */
-        $this->socket = socket_create(AF_INET, SOCK_RAW, 1);
+        if (substr(PHP_OS, 0 ,3) == 'WIN') {
+            $socket = socket_create(AF_INET, SOCK_RAW, 1);
+        } else {
+            // Linux 使用 SOCK_DGRAM 并且需要 sudo sysctl -w net.ipv4.ping_group_range='mingid maxgid'
+            $socket = socket_create(AF_INET, SOCK_DGRAM, 1);
+        }
         /* set socket receive timeout to 1 second */
-        socket_set_option($this->socket, SOL_SOCKET, SO_RCVTIMEO, ['sec' => $timeout, 'usec' => 0]);
-    }
-
-    public function run($ip)
-    {
+        socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, ['sec' => $timeout, 'usec' => 0]);
+        
         $delay = false;
         /* ICMP ping packet with a pre-calculated checksum */
         $package = "\x08\x00\x19\x2f\x00\x00\x00\x00\x70\x69\x6e\x67";
         /* connect to socket */
-        socket_connect($this->socket, $ip, null);
+        socket_connect($socket, $ip, null);
         $startTime = msectime();
-        socket_send($this->socket, $package, strlen($package), 0);
+        socket_send($socket, $package, strlen($package), 0);
         // 读取不到数据不抛出警告
-        if (@socket_read($this->socket, 255)) {
+        if (@socket_read($socket, 255)) {
             $delay = msectime() - $startTime;
         }
+        socket_close($socket);
         return $delay;
-    }
-
-    public function __destruct()
-    {
-        !empty($this->socket) && socket_close($this->socket);
     }
 }
 

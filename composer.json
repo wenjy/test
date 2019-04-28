@@ -8,7 +8,8 @@
         }
     ],
     "require": {
-        "php": ">=7.0"
+        "php": ">=7.0",
+        "ext-sockets": "*"
     },
     "config": {
         "process-timeout": 1800
