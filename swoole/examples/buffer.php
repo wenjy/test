@@ -5,11 +5,14 @@ $buffer->append(str_repeat("B", 20));
 $buffer->append(str_repeat("C", 30));
 
 var_dump($buffer);
-echo $buffer->substr(0, 10, true)."\n";
-echo $buffer->substr(0, 20, true)."\n";
-echo $buffer->substr(0, 30)."\n";
+// capacity->128 length->60
+echo $buffer->substr(0, 10, true) . "\n";
+echo $buffer->substr(0, 20, true) . "\n";
+echo $buffer->substr(0, 30) . "\n";
 $buffer->clear();
 
-echo $buffer->substr(0, 10, true)."\n";
+// PHP Warning:  Swoole\Buffer::substr(): offset(0, 10) is out of bounds.
+echo $buffer->substr(0, 10, true) . "\n";
 var_dump($buffer);
+// length->0
 sleep(1);

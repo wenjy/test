@@ -21,8 +21,8 @@ if(!extension_loaded('redis')) {
 $serv = new swoole_server("0.0.0.0", 9508);
 
 $serv->set(array(
-    'worker_num' => 4,//base on you cpu nums
-    'task_worker_num' => 4,//better equal to worker_num, anyway you can define your own
+    'worker_num' => 2,//base on you cpu nums
+    'task_worker_num' => 2,//better equal to worker_num, anyway you can define your own
 	'heartbeat_check_interval' => 5,
 	'heartbeat_idle_time' => 5,
     'open_cpu_affinity' => 1,

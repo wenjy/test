@@ -6,7 +6,7 @@ $serv->set(array(
     'task_worker_num' => 20, //database connection pool
     'db_uri' => 'mysql:host=127.0.0.1;dbname=test',
     'db_user' => 'root',
-    'db_passwd' => 'root',
+    'db_passwd' => '123456',
 ));
 
 function my_onRequest_sync($req, $resp)
