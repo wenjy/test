@@ -86,7 +86,6 @@ $serv->on('receive', function ($serv, $fd, $reactorId, $data) {
     echo "Dispath AsyncTask: id=$task_id\n";
 
     $serv->send($fd, "Server: ".$data);
-    $serv->close();
 });
 
 // 接收到UDP数据包时回调此函数，发生在worker进程中
