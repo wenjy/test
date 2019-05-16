@@ -9,7 +9,8 @@
     ],
     "require": {
         "php": ">=7.2",
-        "ext-sockets": "*"
+        "ext-sockets": "*",
+        "ext-json": "*"
     },
     "config": {
         "process-timeout": 1800
