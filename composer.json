@@ -10,7 +10,9 @@
     "require": {
         "php": ">=7.2",
         "ext-sockets": "*",
-        "ext-json": "*"
+        "ext-json": "*",
+        "grpc/grpc": "^1.19",
+        "google/protobuf": "^3.7"
     },
     "config": {
         "process-timeout": 1800

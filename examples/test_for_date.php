@@ -16,29 +16,29 @@ $end = 'I';
 for ($i = $start; $i <= $end; $i++) {
     echo $i;
 }
-echo PHP_EOL;
+/*echo PHP_EOL;
 $z = 'Z';
 echo ++$z;
 echo PHP_EOL;
-echo ++$z;
+echo ++$z;*/
 
-echo PHP_EOL;
+/*echo PHP_EOL;
 $start  = 'AA';
 $end = 'AF';
 for ($i = $start; $i <= $end; $i++) {
     echo $i;
-}
+}*/
 
 echo PHP_EOL;
 $start  = 'A';
-$end = 'AF';
+$end = 'AZ';
 for ($i = $start; $i <= $end; $i++) {
     echo $i;
 }
 
-echo PHP_EOL;
+/*echo PHP_EOL;
 $start  = 'A1';
 $end = 'A5';
 for ($i = $start; $i <= $end; $i++) {
     echo $i;
-}
+}*/
