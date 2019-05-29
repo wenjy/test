@@ -22,3 +22,5 @@ $info['update_url'] = 'http://apk.fr18.mmarket.com/cdn/rs/publish10/prepublish11
 var_dump(pathinfo(parse_url($info['update_url'])['path'], PATHINFO_EXTENSION));
 
 var_dump(test());
+
+var_dump((array)true);
