@@ -12,7 +12,10 @@
         "ext-sockets": "*",
         "ext-json": "*",
         "grpc/grpc": "^1.19",
-        "google/protobuf": "^3.7"
+        "google/protobuf": "^3.7",
+        "ext-mbstring": "*",
+        "ext-pcntl": "*",
+        "ext-posix": "*"
     },
     "config": {
         "process-timeout": 1800
