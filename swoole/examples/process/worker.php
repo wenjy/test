@@ -83,7 +83,7 @@ function child_async(swoole_process $worker)
 {
     //echo "Worker: start. PID=".$worker->pid."\n";
     //recv data from master
-    $GLOBALS['worker'] = $worker;
+    $GLOBALS['WorkerProcess'] = $worker;
     global $argv;
     $worker->name("{$argv[0]}: worker #".$worker->id);
 
