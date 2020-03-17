@@ -1,5 +1,4 @@
 <?php
-
 $arr1 = [1];
 $arr2 = [2 => 2];
 var_dump($arr1 + $arr2);exit;

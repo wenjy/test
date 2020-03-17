@@ -15,7 +15,8 @@
         "google/protobuf": "^3.7",
         "ext-mbstring": "*",
         "ext-pcntl": "*",
-        "ext-posix": "*"
+        "ext-posix": "*",
+        "ext-curl": "*"
     },
     "config": {
         "process-timeout": 1800
