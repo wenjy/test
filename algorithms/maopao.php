@@ -4,7 +4,11 @@
  * @date: 下午5:01 2019/3/15
  */
 
-function maoPao($arr)
+/**
+ * @param array $arr
+ * @return array
+ */
+function maoPao(array $arr)
 {
     $len = count($arr);
     //设置一个空数组 用来接收冒出来的泡

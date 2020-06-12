@@ -105,27 +105,19 @@ class ConsistentHash
 }
 
 $ch_obj = new ConsistentHash();
-$ch_obj->addNode(md5('link-rs1.proxy.agzzu.com'));
-$ch_obj->addNode(md5('link-rs2.proxy.agzzu.com'));
-$ch_obj->addNode(md5('link-rs3.proxy.agzzu.com'));
-$ch_obj->addNode(md5('link-rs4.proxy.agzzu.com'));
-//$ch_obj->addNode('link-rs1.proxy.agzzu.com');
-//$ch_obj->addNode('link-rs2.proxy.agzzu.com');
-//$ch_obj->addNode('link-rs3.proxy.agzzu.com');
-//$ch_obj->addNode('link-rs4.proxy.agzzu.com');
-//$ch_obj->addNode(md5(random()));
-//$ch_obj->addNode(md5(random()));
-//$ch_obj->addNode(md5(random()));
-//$ch_obj->addNode(md5(random()));
+$ch_obj->addNode(random());
+$ch_obj->addNode(random());
+$ch_obj->addNode(random());
+$ch_obj->addNode(random());
 
 $rings = [];
-for ($i = 1; $i <= 300000; $i++) {
+for ($i = 1; $i <= 10000; $i++) {
     $key = md5(random());
     $node = $ch_obj->getNode($key);
     $rings[$node] = isset($rings[$node]) ? ++$rings[$node] : 1;
 }
 
-sort($rings);
+//sort($rings);
 var_dump($rings);
 
 function random($length = 16)

@@ -6,7 +6,14 @@
  * @author: jiangyi
  * @date: 下午8:34 2018/5/18
  */
-function insertionSort($arr, $sort = 'ASC')
+
+
+/**
+ * @param array $arr
+ * @param string $sort
+ * @return array
+ */
+function insertionSort(array $arr, $sort = 'ASC')
 {
     $length = count($arr);
     for ($j = 1; $j < $length; $j++) {

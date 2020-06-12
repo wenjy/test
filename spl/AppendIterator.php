@@ -7,12 +7,7 @@
 /**
  * 这个迭代器能陆续遍历几个迭代器
  *
- * Class Obj
  */
-class Obj extends AppendIterator
-{
-
-}
 
 $arrayIteratorOne = new ArrayIterator(['a', 'b', 'c']);
 $arrayIteratorTwo = new ArrayIterator(['d', 'e', 'f']);

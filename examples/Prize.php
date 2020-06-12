@@ -73,7 +73,7 @@ $server_info = [
 $prize = new Prize($server_info);
 
 $rings = [];
-for ($i = 1; $i <= 300000; $i++) {
+for ($i = 1; $i <= 30000; $i++) {
     $node = $prize->getServerMark();
     $rings[$node] = isset($rings[$node]) ? ++$rings[$node] : 1;
 }

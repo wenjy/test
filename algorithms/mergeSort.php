@@ -8,9 +8,15 @@
  * @date: 下午9:55 2018/11/23
  */
 
-$arr = [4, 3, 2, 1];
+/**
+ * @param $arr
+ * @param $p
+ * @param $q
+ * @param $r
+ */
 function merge(&$arr, $p, $q, $r)
 {
+    $temp = [];
     // 两个起始点位置
     $i = $p;
     $j = $q + 1;
@@ -39,6 +45,11 @@ function merge(&$arr, $p, $q, $r)
     }
 }
 
+/**
+ * @param $arr
+ * @param $p
+ * @param $r
+ */
 function mergeSort(&$arr, $p, $r)
 {
     //当子序列长度为1时，不用再分组
@@ -51,6 +62,7 @@ function mergeSort(&$arr, $p, $r)
     }
 }
 
+$arr = [4, 3, 2, 1];
 mergeSort($arr, 0, count($arr) - 1);
 var_dump($arr);
 

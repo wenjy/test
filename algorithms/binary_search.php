@@ -6,6 +6,11 @@
  *
  */
 
+/**
+ * @param array $data
+ * @param $search
+ * @return int|null 返回查询到的键名
+ */
 function binary_search(array $data, $search)
 {
     $low = 0;

@@ -7,10 +7,10 @@
 /**
  * 选择排序法思路： 每次选择一个相应的元素，然后将其放到指定的位置
  * 实现思路 双重循环完成，外层控制轮数，当前的最小值。内层 控制的比较次数
- * @param $arr
- * @return mixed
+ * @param array $arr
+ * @return array
  */
-function selectSort($arr)
+function selectSort(array $arr)
 {
     // $i 当前最小值的位置， 需要参与比较的元素
     $len = count($arr);

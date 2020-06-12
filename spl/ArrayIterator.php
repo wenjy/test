@@ -2,6 +2,7 @@
 /**
  * 这个迭代器允许在遍历数组和对象时删除和更新值与键。
  *
+ * implements ArrayAccess , SeekableIterator , Countable , Serializable
  * @author: jiangyi
  * @date: 上午11:13 2018/11/12
  */

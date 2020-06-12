@@ -27,6 +27,17 @@ trait TraitB
     }
 }
 
+class TestB
+{
+    use TraitA;
+}
+
+class TestC
+{
+    use TraitB;
+}
+
+var_dump((new TestC())->getExtraData());return;
 
 interface InterfaceA
 {

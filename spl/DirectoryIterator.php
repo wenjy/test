@@ -5,7 +5,7 @@
  */
 
 try {
-    foreach (new DirectoryIterator('./') as $item) {
+    foreach (new DirectoryIterator(__DIR__) as $item) {
         if ($item->getFilename() == 'ArrayObject.php') {
             echo 'getFilename()->' . $item->getFilename() . PHP_EOL;
             echo 'isDot()->' . $item->isDot() . PHP_EOL;

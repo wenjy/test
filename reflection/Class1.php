@@ -21,19 +21,11 @@ class Class4
     }
 }
 
-$class4 = new Class4();
-$class4->id = 123;
-var_dump($class4);
 class ClassA
 {
     public function __construct(Class4 $class4)
     {
     }
-}
-
-class Class2 extends Class1
-{
-
 }
 
 class Instance
@@ -50,12 +42,12 @@ class Instance
     }
 }
 
-$reflection = new ReflectionClass('ClassA');
+$reflection = new ReflectionClass('Class1');
 
 //var_dump($reflection);
 $constructor = $reflection->getConstructor();
 $dependencies = [];
-if ($constructor !== null) {
+if (!is_null($constructor)) {
     // 循环构造函数的参数
     foreach ($constructor->getParameters() as $param) {
         // 构造函数如果有默认值，将默认值作为依赖。即然是默认值了，就肯定是简单类型了。
@@ -73,15 +65,79 @@ if ($constructor !== null) {
 
 var_dump($dependencies);
 
-//foreach ($dependencies as $index => $dependency) {
-    var_dump($reflection->isInstantiable());
-//}
+foreach ($dependencies as $index => $dependency) {
+    var_dump($dependency->isInstantiable());
+}
 
-list($u_sec, $sec) = explode(' ', microtime());
-$vip_no =  substr(date('Ymd', $sec), 2) . substr($u_sec, 2, 4) . mt_rand(0,9);
-var_dump($vip_no);
+class MyContainer
+{
+    protected static $instance;
 
-var_dump(empty($exception));
+    /**
+     * An array of the types that have been resolved.
+     *
+     * @var bool[]
+     */
+    protected $resolved = [];
+
+    /**
+     * The container's bindings.
+     *
+     * @var array[]
+     */
+    protected $bindings = [];
+
+    /**
+     * The parameter override stack.
+     *
+     * @var array[]
+     */
+    protected $with = [];
+
+    /**
+     * The container's shared instances.
+     *
+     * @var object[]
+     */
+    protected $instances = [];
+
+    /**
+     * Get the globally available instance of the container.
+     *
+     * @return static
+     */
+    public static function getInstance()
+    {
+        if (is_null(static::$instance)) {
+            static::$instance = new static;
+        }
+
+        return static::$instance;
+    }
+
+    /**
+     * Resolve the given type from the container.
+     *
+     * @param  string  $abstract
+     * @param  array  $parameters
+     * @return mixed
+     *
+     */
+    public function make($abstract, array $parameters = [])
+    {
+        return $this->resolve($abstract, $parameters);
+    }
+
+    protected function resolve($abstract, $parameters = [])
+    {
+        if (isset($this->instances[$abstract])) {
+            return $this->instances[$abstract];
+        }
+
+        $this->with[] = $parameters;
+    }
+}
+
 function test1($a = 1)
 {
 
@@ -116,11 +172,3 @@ function test3($a, $b)
 }
 
 test3(1,2,3,4);
-
-$arr = ['a' => null];
-var_dump(isset($arr[  'a']));
-var_dump(array_key_exists('a', $arr));
-var_dump(defined('TEST'));
-$dir = __DIR__;
-var_dump($dir);
-var_dump(dirname($dir));

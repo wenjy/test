@@ -59,6 +59,10 @@ class MyServer
                 $port = $this->swoole->addlistener($ip, 0, SWOOLE_SOCK_TCP);
             }
         }
+
+        $port = $this->swoole->addlistener('127.0.0.1', 9101, SWOOLE_SOCK_UDP);
+        $port->set([]);
+        $port->on('Packet', [$this, 'onPacket']);
     }
 
     protected function bindEvent()
@@ -112,6 +116,8 @@ class MyServer
 
     public function onPacket($server, string $data, array $client_info) {
         echo 'on Packet' . PHP_EOL;
+        $server->sendto($client_info['address'], $client_info['port'], "Server ".$data);
+        var_dump($client_info);
     }
 
     public function onReceive($serv, $fd, $reactorId, $data) {

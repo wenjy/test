@@ -1,4 +1,13 @@
 <?php
+
+$data = 'GET https://www.baidu.com:443/';
+
+//var_dump($res = explode("\r\n\r\n", $data, 2));
+//var_dump($res1 = explode("\r\n", $res[0]));
+//var_dump(explode(' ', $res1[0]));
+var_dump(trim('http://a.a.b/aa', '/'));
+var_dump(explode(' ', 'get  aaa'));
+return;
 $arr1 = [1];
 $arr2 = [2 => 2];
 var_dump($arr1 + $arr2);exit;

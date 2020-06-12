@@ -6,8 +6,10 @@
 
 /**
  * 阶乘
+ * @param int $n
+ * @return int
  */
-function factorial($n)
+function factorial(int $n)
 {
     //array_product 计算并返回数组的乘积
     //range 创建一个包含指定范围的元素的数组
@@ -16,14 +18,20 @@ function factorial($n)
 
 /**
  * 排列数
+ * @param int $n
+ * @param int $m
+ * @return int
  */
-function A($n, $m)
+function A(int $n, int $m)
 {
     return factorial($n) / factorial($n - $m);
 }
 
 /**
  * 组合数
+ * @param int $n
+ * @param int $m
+ * @return int
  */
 function C($n, $m)
 {
@@ -32,6 +40,9 @@ function C($n, $m)
 
 /**
  * 排列结果
+ * @param array $a 排列的数组
+ * @param int $m 排列的个数
+ * @return array
  */
 function arrangement($a, $m)
 {
@@ -58,8 +69,11 @@ function arrangement($a, $m)
 
 /**
  * 组合结果
+ * @param array $a 组合的数组
+ * @param int $m 组合的个数
+ * @return array
  */
-function combination($a, $m)
+function combination(array $a, int $m)
 {
     $r = [];
     $n = count($a);
@@ -83,4 +97,5 @@ function combination($a, $m)
 }
 
 var_dump(C(5, 3));
-var_dump(combination(range(1, 5), 3));
+var_dump(combination(range(1, 3), 2));
+var_dump(arrangement(range(1, 3), 2));
