@@ -13,19 +13,30 @@ class CoSocket
         $this->socket = $socket;
     }
 
-    public function accept()
+    /**
+     * @return Generator
+     */
+    public function accept(): Generator
     {
         yield waitForRead($this->socket);
         yield retval(new CoSocket(stream_socket_accept($this->socket, 0)));
     }
 
-    public function read($size)
+    /**
+     * @param int $size
+     * @return Generator
+     */
+    public function read(int $size): Generator
     {
         yield waitForRead($this->socket);
         yield retval(fread($this->socket, $size));
     }
 
-    public function write($string)
+    /**
+     * @param string $string
+     * @return Generator
+     */
+    public function write(string $string): Generator
     {
         yield waitForWrite($this->socket);
         fwrite($this->socket, $string);
@@ -37,7 +48,11 @@ class CoSocket
     }
 }
 
-function waitForRead($socket)
+/**
+ * @param $socket
+ * @return SystemCall
+ */
+function waitForRead($socket): SystemCall
 {
     return new SystemCall(
         function (Task $task, Scheduler $scheduler) use ($socket) {
@@ -46,7 +61,11 @@ function waitForRead($socket)
     );
 }
 
-function waitForWrite($socket)
+/**
+ * @param $socket
+ * @return SystemCall
+ */
+function waitForWrite($socket): SystemCall
 {
     return new SystemCall(
         function (Task $task, Scheduler $scheduler) use ($socket) {

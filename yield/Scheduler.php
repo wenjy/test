@@ -4,10 +4,11 @@
  * @date: 下午6:11 2018/2/26
  */
 
-include_once './Task.php';
-
 class Scheduler
 {
+    /**
+     * @var int
+     */
     protected $maxTaskId = 0;
 
     /**
@@ -35,9 +36,8 @@ class Scheduler
     /**
      * @param Generator $coroutine
      * @return int
-     * @author jiangyi
      */
-    public function newTask(Generator $coroutine)
+    public function newTask(Generator $coroutine):int
     {
         $tid = ++$this->maxTaskId;
         $task = new Task($tid, $coroutine);
@@ -49,7 +49,6 @@ class Scheduler
     /**
      * 插入队列
      * @param Task $task
-     * @author jiangyi
      */
     public function schedule(Task $task)
     {
@@ -60,6 +59,7 @@ class Scheduler
     {
         while (!$this->taskQueue->isEmpty()) {
             // 拿出任务
+            /**@var Task $task*/
             $task = $this->taskQueue->dequeue();
             // 运行
             $retval = $task->run();
@@ -83,7 +83,11 @@ class Scheduler
         }
     }
 
-    public function killTask($tid)
+    /**
+     * @param int $tid
+     * @return bool
+     */
+    public function killTask(int $tid):bool
     {
         if (!isset($this->taskMap[$tid])) {
             return false;
@@ -103,6 +107,10 @@ class Scheduler
         return true;
     }
 
+    /**
+     * @param $socket
+     * @param Task $task
+     */
     public function waitForRead($socket, Task $task)
     {
         if (isset($this->waitingForRead[(int)$socket])) {
@@ -125,12 +133,12 @@ class Scheduler
     protected function ioPoll($timeout)
     {
         $rSocks = [];
-        foreach ($this->waitingForRead as list($socket)) {
+        foreach ($this->waitingForRead as [$socket]) {
             $rSocks[] = $socket;
         }
 
         $wSocks = [];
-        foreach ($this->waitingForWrite as list($socket)) {
+        foreach ($this->waitingForWrite as [$socket]) {
             $wSocks[] = $socket;
         }
 
@@ -144,7 +152,7 @@ class Scheduler
         }
 
         foreach ($rSocks as $socket) {
-            list(, $tasks) = $this->waitingForRead[(int)$socket];
+            [, $tasks] = $this->waitingForRead[(int)$socket];
             unset($this->waitingForRead[(int)$socket]);
 
             foreach ($tasks as $task) {
@@ -153,7 +161,7 @@ class Scheduler
         }
 
         foreach ($wSocks as $socket) {
-            list(, $tasks) = $this->waitingForWrite[(int)$socket];
+            [, $tasks] = $this->waitingForWrite[(int)$socket];
             unset($this->waitingForWrite[(int)$socket]);
 
             foreach ($tasks as $task) {

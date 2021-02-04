@@ -19,7 +19,11 @@ class CoroutineReturnValue
     }
 }
 
-function retval($value)
+/**
+ * @param $value
+ * @return CoroutineReturnValue
+ */
+function retval($value): CoroutineReturnValue
 {
     return new CoroutineReturnValue($value);
 }

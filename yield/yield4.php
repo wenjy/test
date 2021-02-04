@@ -4,14 +4,19 @@
  * @date: 下午10:33 2019/3/13
  */
 
-include_once './Scheduler.php';
-include_once './SystemCall.php';
-include_once './CoroutineReturnValue.php';
-include_once './CoSocket.php';
+include_once __DIR__ . '/Task.php';
+include_once __DIR__ . '/Scheduler.php';
+include_once __DIR__ . '/SystemCall.php';
+include_once __DIR__ . '/CoroutineReturnValue.php';
+include_once __DIR__ . '/CoSocket.php';
 
 $scheduler = new Scheduler;
 
-function newTask(Generator $coroutine)
+/**
+ * @param Generator $coroutine
+ * @return SystemCall
+ */
+function newTask(Generator $coroutine): SystemCall
 {
     return new SystemCall(
         function (Task $task, Scheduler $scheduler) use ($coroutine) {
@@ -21,11 +26,19 @@ function newTask(Generator $coroutine)
     );
 }
 
-function server($port) {
+/**
+ * @param $port
+ * @return Generator
+ * @throws Exception
+ */
+function server($port): Generator
+{
     echo "Starting server at port $port...\n";
 
-    $socket = @stream_socket_server("tcp://localhost:$port", $errNo, $errStr);
-    if (!$socket) throw new Exception($errStr, $errNo);
+    $socket = stream_socket_server("tcp://localhost:$port", $errNo, $errStr);
+    if (!$socket) {
+        throw new Exception($errStr, $errNo);
+    }
 
     stream_set_blocking($socket, 0);
 
@@ -37,7 +50,12 @@ function server($port) {
     }
 }
 
-function handleClient($socket) {
+/**
+ * @param $socket
+ * @return Generator
+ */
+function handleClient($socket): Generator
+{
     /* @var CoSocket $socket */
     $data = (yield $socket->read(8192));
 

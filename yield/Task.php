@@ -39,16 +39,25 @@ class Task
         $this->coroutine = stackedCoroutine($coroutine);
     }
 
-    public function setException($exception)
+    /**
+     * @param $exception
+     */
+    public function setException(Exception $exception)
     {
         $this->exception = $exception;
     }
 
-    public function getTaskId()
+    /**
+     * @return int
+     */
+    public function getTaskId(): int
     {
         return $this->taskId;
     }
 
+    /**
+     * @param mixed $sendValue
+     */
     public function setSendValue($sendValue)
     {
         $this->sendValue = $sendValue;
@@ -76,6 +85,10 @@ class Task
     }
 }
 
+/**
+ * @param Generator $gen
+ * @throws Exception
+ */
 function stackedCoroutine(Generator $gen)
 {
     $stack = new SplStack;
